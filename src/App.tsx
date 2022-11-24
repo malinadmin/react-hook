@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React,{ useState,useEffect } from 'react'
+import {
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom"
+import routes from '../src/router'
+import { ConfigProvider } from 'zarm'
+import NavBar from './components/navBar/NavBar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+  const location = useLocation() // 拿到 location 实例
+  const { pathname } = location // 获取当前路径
+  const needNav = ['/', '/data', '/user'] // 需要底部导航栏的路径
+  const [showNav, setShowNav] = useState(false) // 是否展示 Nav
+  useEffect(() => {
+    setShowNav(needNav.includes(pathname))
+  }, [pathname]) // [] 内的参数若是变化，便会执行上述回调函数=
+  return <>
+    <ConfigProvider>
+        <Routes>
+          {routes.map(route => <Route exact key={route.path} path={route.path} element={<route.component />} />)}
+        </Routes>
+      </ConfigProvider>
+      <NavBar showNav={showNav} />   
+   </>
 }
 
 export default App

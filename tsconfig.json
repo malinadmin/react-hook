@@ -8,6 +8,11 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "baseUrl": "./",
+    "paths": {
+			"/@/*": ["src/*"],
+			"@/*": ["src/*"]
+		},
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -16,6 +21,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts","src/**/*.jsx","types/*.d.ts", "src/container/home/index.tsx", "src/container/about/index.tsx"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
