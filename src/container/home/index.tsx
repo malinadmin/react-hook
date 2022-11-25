@@ -1,13 +1,21 @@
 import React from 'react'
-import { Button } from 'zarm'
+import { getInfo } from './api/home'
+
 import stl from './style.module.less'
 
-export default function Index() {
+const Home = () => {
+	//请求
+	const get_info = async () => {
+		await getInfo()
+	}
+
+	get_info()
+	console.log(22)
 	return (
 		<div className={stl.home}>
 			主页
 			<span></span>
-			<Button theme="primary">按钮</Button>
 		</div>
 	)
 }
+export default Home

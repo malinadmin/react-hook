@@ -16,15 +16,15 @@ export default defineConfig({
 	plugins: [
 		react(),
 		createStyleImportPlugin({
-			libs: [
-				{
-					libraryName: 'zarm',
-					esModule: true,
-					resolveStyle: (name) => {
-						return `zarm/es/${name}/style/css`
-					},
-				},
-			],
+			// libs: [
+			// 	{
+			// 		libraryName: 'zarm',
+			// 		esModule: true,
+			// 		resolveStyle: (name) => {
+			// 			return `zarm/es/${name}/style/css`
+			// 		},
+			// 	},
+			// ],
 		}),
 	],
 	css: {

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import { Cookies } from '../utils/storage'
-
+import { Cookies, TOKEN_NAME } from '../utils/storage'
+import { Toast } from 'antd-mobile'
 export interface ExpAxiosRequestConfig extends AxiosRequestConfig {
 	loading?: any
 	reqTime?: number
@@ -21,6 +21,10 @@ const request = (config: ExpAxiosRequestConfig) => {
 				const res = response.data
 				if (res.code !== 0) {
 					reject(response || 'Error')
+					Toast.show({
+						icon: 'fail',
+						content: res.msg,
+					})
 				} else {
 					resolve(res)
 				}
@@ -32,7 +36,7 @@ const request = (config: ExpAxiosRequestConfig) => {
 }
 
 export const setRequestApi = () => {
-	instance.defaults.baseURL = '' //请求地址
+	instance.defaults.baseURL = 'http://127.0.0.1:7001/api' //请求地址
 }
 
 export function setInterceptors() {
@@ -40,14 +44,14 @@ export function setInterceptors() {
 	// 请求拦截器
 	instance.interceptors.request.use(
 		function (conf: ExpAxiosRequestConfig) {
-			if (Cookies.get('token')) {
-				;(conf.headers as any).common['Token'] = Cookies.get('token')
+			if (Cookies.get() && conf.headers) {
+				conf.headers[TOKEN_NAME] = Cookies.get()
 			}
 			// 实现页面的加载效果
 			if (conf.loading) {
 				conf.reqTime = new Date().getTime() // 存储一个发起请求的时间戳
 
-				conf.loading.value = true // 将传入的 响应式数据loading 设为true
+				conf.loading = true // 将传入的 响应式数据loading 设为true
 				curLoading = conf.loading // 将响应式的 loading 放入上一级作用域，方便后续使用
 			}
 
