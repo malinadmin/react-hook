@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import {Cookies} from '../utils/storage'
+import { Cookies } from '../utils/storage'
 
 export interface ExpAxiosRequestConfig extends AxiosRequestConfig {
 	loading?: any
@@ -14,22 +14,24 @@ const instance = axios.create({})
  * @param {*} config 参考 axios 文档
  * @param {Number} timer 延迟时间（ms)，只有请求的事件超过该值时才会返回数据
  */
- const request = (config: ExpAxiosRequestConfig) => {
-   return new Promise((resolve, reject) => {
-      instance(config).then(async (response)=>{
-         const res = response.data
-         if(res.code!==0){
-            reject(response || 'Error')
-         }else{
-            resolve(res)
-         }
-      }).catch((e)=>{
-         reject(e)
-      })
-   })
- }
+const request = (config: ExpAxiosRequestConfig) => {
+	return new Promise((resolve, reject) => {
+		instance(config)
+			.then(async (response) => {
+				const res = response.data
+				if (res.code !== 0) {
+					reject(response || 'Error')
+				} else {
+					resolve(res)
+				}
+			})
+			.catch((e) => {
+				reject(e)
+			})
+	})
+}
 
- export const setRequestApi = () => {
+export const setRequestApi = () => {
 	instance.defaults.baseURL = '' //请求地址
 }
 
@@ -39,7 +41,7 @@ export function setInterceptors() {
 	instance.interceptors.request.use(
 		function (conf: ExpAxiosRequestConfig) {
 			if (Cookies.get('token')) {
-				(conf.headers as any).common['Token']  = Cookies.get('token')
+				;(conf.headers as any).common['Token'] = Cookies.get('token')
 			}
 			// 实现页面的加载效果
 			if (conf.loading) {

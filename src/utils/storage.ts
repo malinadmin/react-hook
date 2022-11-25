@@ -1,4 +1,4 @@
-import jsCookie,{CookieAttributes} from 'js-cookie'
+import jsCookie, { CookieAttributes } from 'js-cookie'
 
 /**
  * jsCookie缓存
@@ -7,9 +7,9 @@ import jsCookie,{CookieAttributes} from 'js-cookie'
  * @method remove 移除临时缓存
  */
 
- export const Cookies = {
+export const Cookies = {
 	// 设置cookie缓存
-	set(key: string, val: any, expire:CookieAttributes = { expires: 30 }) {
+	set(key: string, val: any, expire: CookieAttributes = { expires: 30 }) {
 		jsCookie.set(key, val, expire)
 	},
 	// 获取cookie缓存
@@ -17,7 +17,7 @@ import jsCookie,{CookieAttributes} from 'js-cookie'
 		return jsCookie.get(key)
 	},
 	// 移除cookie缓存
-	remove(key: string, expire?:CookieAttributes) {
+	remove(key: string, expire?: CookieAttributes) {
 		jsCookie.remove(key, expire)
 	},
 }

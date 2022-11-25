@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { createStyleImportPlugin } from 'vite-plugin-style-import'
-import { resolve }  from 'path'
-
+import { resolve } from 'path'
 
 const pathResolve = (dir: string): any => {
 	return resolve(__dirname, '.', dir)
@@ -13,27 +12,30 @@ const alias: Record<string, string> = {
 }
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve: { alias },
-  plugins: [react(),createStyleImportPlugin({
-    libs:[
-      {
-        libraryName: 'zarm',
-        esModule:true,
-        resolveStyle: (name) => {
-          return `zarm/es/${name}/style/css`
-        }
-      }
-    ]
-  })],
-  css:{
-    modules:{
-      localsConvention: 'dashesOnly'
-    },
-    preprocessorOptions: {
-      less: {
-        // 支持内联 JavaScript
-        javascriptEnabled: true,
-      }
-    }
-  }
+	resolve: { alias },
+	plugins: [
+		react(),
+		createStyleImportPlugin({
+			libs: [
+				{
+					libraryName: 'zarm',
+					esModule: true,
+					resolveStyle: (name) => {
+						return `zarm/es/${name}/style/css`
+					},
+				},
+			],
+		}),
+	],
+	css: {
+		modules: {
+			localsConvention: 'dashesOnly',
+		},
+		preprocessorOptions: {
+			less: {
+				// 支持内联 JavaScript
+				javascriptEnabled: true,
+			},
+		},
+	},
 })
