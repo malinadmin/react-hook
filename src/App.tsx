@@ -11,6 +11,7 @@ function App() {
 	// useEffect(() => {
 	// 	setShowNav(needNav.includes(pathname))
 	// }, [pathname]) // [] 内的参数若是变化，便会执行上述回调函数=
+	console.log(233)
 	return (
 		<>
 			<Routes>
