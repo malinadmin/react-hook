@@ -1,5 +1,5 @@
 import Home from '../container/home'
-import Main from '../container/main'
+import Regist from '../container/regist'
 import About from '../container/about'
 import Data from '../container/data'
 import User from '../container/user'
@@ -8,11 +8,15 @@ import Login from '../container/login'
 const routes = [
 	{
 		path: '/',
-		component: Main,
+		component: Home,
 	},
 	{
 		path: '/home',
 		component: Home,
+	},
+	{
+		path: '/regist',
+		component: Regist,
 	},
 	{
 		path: '/about',

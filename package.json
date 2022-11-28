@@ -18,12 +18,14 @@
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-lottie": "^1.2.3",
 		"react-router-dom": "^6.4.3"
 	},
 	"devDependencies": {
 		"@types/node": "^18.11.9",
 		"@types/react": "^18.0.24",
 		"@types/react-dom": "^18.0.8",
+		"@types/react-lottie": "^1.2.6",
 		"@typescript-eslint/eslint-plugin": "^5.44.0",
 		"@typescript-eslint/parser": "^5.44.0",
 		"@vitejs/plugin-react": "^2.2.0",

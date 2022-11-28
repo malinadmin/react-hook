@@ -3,8 +3,9 @@ import { Form, Input, Button, Dialog } from 'antd-mobile'
 import stl from './style.module.less'
 import type { LoginForm } from './types/login'
 import { login } from './api/login'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Cookies, TOKEN_NAME } from '/@/utils/storage'
+import loginBg from './static/login_bg.svg'
 export default function Login() {
 	const loading = false
 	const navigate = useNavigate()
@@ -16,7 +17,9 @@ export default function Login() {
 	return (
 		<div className={stl.login}>
 			<div className={stl.from}>
-				<h2>登录</h2>
+				<div>
+					<img src={loginBg} alt="" />
+				</div>
 				<div>
 					<Form
 						layout="horizontal"
@@ -42,6 +45,11 @@ export default function Login() {
 							rules={[{ required: true, message: '密码不能为空' }]}
 						>
 							<Input placeholder="请输入" type="password" />
+						</Form.Item>
+						<Form.Item>
+							<p className={stl.regist}>
+								没有账号? <Link to="/regist">注册</Link>
+							</p>
 						</Form.Item>
 					</Form>
 				</div>

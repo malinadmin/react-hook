@@ -1,6 +1,6 @@
 import React from 'react'
 import { getInfo } from './api/home'
-
+import { NavBar } from 'antd-mobile'
 import stl from './style.module.less'
 
 const Home = () => {
@@ -10,11 +10,9 @@ const Home = () => {
 	}
 
 	get_info()
-	console.log(22)
 	return (
 		<div className={stl.home}>
-			主页
-			<span></span>
+			<NavBar back={null}> 首页</NavBar>
 		</div>
 	)
 }

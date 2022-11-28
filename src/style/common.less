@@ -1,9 +1,18 @@
+html,
+body,
+#root {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
 .app {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 }
-
+.adm-nav-bar {
+	background-color: #fff;
+}
 .top {
 	flex: 0;
 	border-bottom: solid 1px var(--adm-color-border);
@@ -11,12 +20,16 @@
 
 .body {
 	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	background-color: #eee;
 }
 
 .bottom {
 	flex: 0;
 	border-top: solid 1px var(--adm-color-border);
+}
+.is-show {
+	display: block;
+}
+.is-hide {
+	display: none;
 }
