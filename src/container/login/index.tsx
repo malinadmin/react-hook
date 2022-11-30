@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Form, Input, Button, Dialog } from 'antd-mobile'
+import React, { useState, useEffect } from 'react'
+import { Form, Input, Button } from 'antd-mobile'
 import stl from './style.module.less'
 import type { LoginForm } from './types/login'
 import { login } from './api/login'
@@ -7,12 +7,14 @@ import { useNavigate, Link } from 'react-router-dom'
 import { Cookies, TOKEN_NAME } from '/@/utils/storage'
 import loginBg from './static/login_bg.svg'
 export default function Login() {
-	const loading = false
+	const [loading, setLoading] = useState(false)
 	const navigate = useNavigate()
 	const onFinish = async (val: LoginForm) => {
-		const { data } = await login(val, loading)
+		setLoading(true)
+		const { data } = await login(val)
 		Cookies.set(TOKEN_NAME, data)
 		navigate('/')
+		setLoading(false)
 	}
 	return (
 		<div className={stl.login}>
@@ -27,8 +29,8 @@ export default function Login() {
 						name="from"
 						onFinish={onFinish}
 						footer={
-							<Button block type="submit" color="primary" size="large">
-								提交
+							<Button loading={loading} block type="submit" color="primary" size="large">
+								登录
 							</Button>
 						}
 					>

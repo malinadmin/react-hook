@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { Cookies, TOKEN_NAME } from '../utils/storage'
 import { Toast } from 'antd-mobile'
+
 export interface ExpAxiosRequestConfig extends AxiosRequestConfig {
 	loading?: any
 	reqTime?: number
@@ -21,6 +22,10 @@ const request = (config: ExpAxiosRequestConfig) => {
 				const res = response.data
 				if (res.code !== 0) {
 					reject(response || 'Error')
+					if ([401].includes(res.code)) {
+						//token过期
+						Cookies.remove()
+					}
 					Toast.show({
 						icon: 'fail',
 						content: res.msg,

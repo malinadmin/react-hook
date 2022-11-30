@@ -1,2 +1,64 @@
 .home {
+	.header {
+		background-color: var(--adm-color-primary);
+		padding: 10px 15px;
+		color: #fff;
+		.slt_typ {
+			padding: 5px;
+			background-color: rgba(255, 255, 255, 0.3);
+			display: inline-block;
+			border-radius: var(--adm-radius-s);
+			margin-bottom: 10px;
+			font-size: 15px;
+			.icon {
+				margin-left: 5px;
+			}
+		}
+		.slt_time {
+			display: flex;
+			align-items: center;
+			> span {
+				margin-right: 10px;
+				font-size: 14px;
+			}
+		}
+	}
+}
+.props_header {
+	height: 40px;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 15px;
+	position: relative;
+	font-size: 14px;
+	.close {
+		position: absolute;
+		right: 15px;
+	}
+}
+.props_body {
+	padding: 15px;
+	font-size: 14px;
+	.grid {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 10px;
+		background-color: #fff;
+		border-radius: var(--adm-radius-s);
+		height: 40px;
+	}
+	.mgtop10 {
+		margin-top: 10px;
+		display: block;
+	}
+	.active {
+		background-color: var(--adm-color-primary);
+		color: #fff;
+	}
+	.mgbom10 {
+		margin-bottom: 10px;
+	}
 }
