@@ -1,0 +1,75 @@
+.list {
+	padding: 0 10px;
+	margin-bottom: 10px;
+	.top_header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #fbfbfb;
+		height: 60px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		padding: 15px;
+		.ml10 {
+			margin-left: 10px;
+		}
+		.fl1 {
+			p {
+				font-size: 16px;
+			}
+		}
+		.fl2 {
+			display: flex;
+			align-items: center;
+			> span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 25px;
+				height: 25px;
+				border-radius: 100%;
+				background-color: var(--adm-color-success);
+				color: #fff;
+				&:first-child {
+					background-color: var(--adm-color-danger);
+				}
+				&:last-child {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+	.body {
+		background-color: #fff;
+		.body_list {
+			display: flex;
+			> div {
+				flex: 1;
+			}
+			.icon {
+				flex: 0 0 20%;
+				padding: 15px;
+			}
+			.fl2 {
+				border-bottom: 1px solid #efefef;
+				padding: 15px;
+				display: flex;
+				justify-content: space-between;
+				p {
+					margin: 0;
+				}
+				.time {
+					display: inline-block;
+					margin-top: 5px;
+					color: #b3b3b3;
+				}
+				.income {
+					color: var(--adm-color-success);
+				}
+				.expense {
+					color: var(--adm-color-danger);
+				}
+			}
+		}
+	}
+}
