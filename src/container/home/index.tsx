@@ -2,12 +2,13 @@ import React, { useState, useRef, ForwardedRef, useEffect, createContext } from 
 import stl from './style.module.less'
 import { AppstoreOutline, DownFill } from 'antd-mobile-icons'
 import TypePopup, { TagPopupExpose } from './typePopup'
-import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
+import { PullToRefresh, InfiniteScroll, ErrorBlock } from 'antd-mobile'
 import { getBillList } from './api/home'
 import dayjs from 'dayjs'
 import type { Types, List } from './types/home'
 import SelectTime, { TimePopupExpose } from './selectTime'
 import BillItem from './billItem'
+import AddBills from './addBills'
 
 export const HomeContext = createContext({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -89,14 +90,17 @@ const Home = () => {
 				<PullToRefresh onRefresh={refresh}>
 					<div className={stl.list}>
 						<HomeContext.Provider value={{ refresh }}>
-							{list.map((item, index) => (
-								<BillItem oneDayBills={item} key={index} />
-							))}
+							{list.length ? (
+								list.map((item, index) => <BillItem oneDayBills={item} key={index} />)
+							) : (
+								<ErrorBlock status="empty" title="暂无数据" />
+							)}
 						</HomeContext.Provider>
 					</div>
 					<InfiniteScroll loadMore={loadMore} hasMore={page < totalPage} />
 				</PullToRefresh>
 			</div>
+			<AddBills />
 			<TypePopup onSelect={onTagSelect} ref={tagPopupRef as ForwardedRef<TagPopupExpose>} />
 			<SelectTime onSelect={onTimeSelect} ref={timePopupRef as ForwardedRef<TimePopupExpose>} />
 		</div>

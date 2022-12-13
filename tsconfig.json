@@ -21,14 +21,7 @@
 		"noEmit": true,
 		"jsx": "react-jsx"
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.jsx",
-		"types/*.d.ts",
-		"src/container/home/index.tsx",
-		"src/container/about/index.tsx",
-		"src/components/navBar/NavBar.tsx"
-	],
+	"include": ["src/**/*.ts", "src/**/*.jsx", "types/*.d.ts"],
 	"exclude": ["node_modules"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

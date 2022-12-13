@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
-import routes from '../src/router'
+import { routes, RouteBeforeEach } from './router'
 import NavBar from './components/navBar/NavBar'
-import { Cookies } from './utils/storage'
+import { ConfigProvider } from 'antd-mobile'
+import zhCN from 'antd-mobile/es/locales/zh-CN'
+
 function App() {
 	const location = useLocation()
 	const { pathname } = location
@@ -13,18 +15,30 @@ function App() {
 		setShowNav(needNav.includes(pathname))
 	}, [pathname]) // [] 内的参数若是变化，便会执行上述回调函数=
 	return (
-		<>
+		<ConfigProvider locale={zhCN}>
 			<div className="app">
 				<div className="body">
 					<Routes>
-						{routes.map((route) => (
-							<Route key={route.path} path={route.path} element={<route.component />} />
-						))}
+						{routes.map((route) => {
+							return (
+								<Route
+									key={route.path}
+									path={route.path}
+									element={
+										<RouteBeforeEach route={route}>
+											<route.component />
+										</RouteBeforeEach>
+									}
+								/>
+							)
+						})}
 					</Routes>
 				</div>
-				<NavBar showNav={showNav} />
+				<div>
+					<NavBar showNav={showNav} />
+				</div>
 			</div>
-		</>
+		</ConfigProvider>
 	)
 }
 export default App
