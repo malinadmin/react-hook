@@ -18,9 +18,9 @@ export interface List {
 
 export interface Bills {
 	amount: number
-	date: string
-	id: number
-	pay_type: number
+	date?: string
+	id?: number
+	pay_type: number | string
 	remark: string
 	type_id: number
 	type_name: string

@@ -1,6 +1,7 @@
 import React, { useState, useRef, ForwardedRef, useEffect, createContext } from 'react'
 import stl from './style.module.less'
-import { AppstoreOutline, DownFill } from 'antd-mobile-icons'
+import adstl from './compontent/addbills/addBills.module.less'
+import { AppstoreOutline, DownFill, EditSOutline } from 'antd-mobile-icons'
 import TypePopup, { TagPopupExpose } from './typePopup'
 import { PullToRefresh, InfiniteScroll, ErrorBlock } from 'antd-mobile'
 import { getBillList } from './api/home'
@@ -8,7 +9,7 @@ import dayjs from 'dayjs'
 import type { Types, List } from './types/home'
 import SelectTime, { TimePopupExpose } from './selectTime'
 import BillItem from './billItem'
-import AddBills from './compontent/addbills/index'
+import ShowPopup, { BillPopupExpose } from './compontent/addbills/showPopup'
 
 export const HomeContext = createContext({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -16,6 +17,7 @@ export const HomeContext = createContext({
 })
 const dateFormate = 'YYYY-MM'
 const Home = () => {
+	const billPopupRef = useRef<BillPopupExpose>()
 	const tagPopupRef = useRef<TagPopupExpose>() // 账单类型 ref
 	const timePopupRef = useRef<TimePopupExpose>()
 	const [currentSelect, setCurrentSelect] = useState<Types>({ id: 'all' } as Types) // 当前筛选类型
@@ -103,7 +105,24 @@ const Home = () => {
 					<ErrorBlock status="empty" title="暂无数据" />
 				)}
 			</div>
-			<AddBills />
+			<div className={adstl.add}>
+				<i>
+					<EditSOutline />
+				</i>
+				<span
+					onClick={() => {
+						billPopupRef.current?.show()
+					}}
+				>
+					记一笔
+				</span>
+				<ShowPopup
+					refresh={() => {
+						getList()
+					}}
+					ref={billPopupRef as ForwardedRef<BillPopupExpose>}
+				/>
+			</div>
 			<TypePopup onSelect={onTagSelect} ref={tagPopupRef as ForwardedRef<TagPopupExpose>} />
 			<SelectTime onSelect={onTimeSelect} ref={timePopupRef as ForwardedRef<TimePopupExpose>} />
 		</div>

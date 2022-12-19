@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { Res } from '@/api/types/common'
-import type { Types, BillList } from '../types/home'
+import type { Types, BillList, Bills } from '../types/home'
 //获取个人信息
 export const getInfo = (loading?: boolean) => {
 	return request({
@@ -28,4 +28,13 @@ export const getBillList = (params: {
 		url: `/bill/list`,
 		params,
 	}) as Promise<Res<BillList>>
+}
+
+//添加账单
+export const addBill = (data: Bills) => {
+	return request({
+		url: `/bill/add`,
+		method: 'POST',
+		data,
+	})
 }
