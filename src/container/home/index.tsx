@@ -8,7 +8,7 @@ import dayjs from 'dayjs'
 import type { Types, List } from './types/home'
 import SelectTime, { TimePopupExpose } from './selectTime'
 import BillItem from './billItem'
-import AddBills from './addBills'
+import AddBills from './compontent/addbills/index'
 
 export const HomeContext = createContext({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -87,18 +87,21 @@ const Home = () => {
 				</div>
 			</div>
 			<div>
-				<PullToRefresh onRefresh={refresh}>
-					<div className={stl.list}>
-						<HomeContext.Provider value={{ refresh }}>
-							{list.length ? (
-								list.map((item, index) => <BillItem oneDayBills={item} key={index} />)
-							) : (
-								<ErrorBlock status="empty" title="暂无数据" />
-							)}
-						</HomeContext.Provider>
-					</div>
-					<InfiniteScroll loadMore={loadMore} hasMore={page < totalPage} />
-				</PullToRefresh>
+				{list.length ? (
+					<PullToRefresh onRefresh={refresh}>
+						<div className={stl.list}>
+							<HomeContext.Provider value={{ refresh }}>
+								{list.map((item, index) => (
+									<BillItem oneDayBills={item} key={index} />
+								))}
+							</HomeContext.Provider>
+						</div>
+
+						<InfiniteScroll loadMore={loadMore} hasMore={page < totalPage} />
+					</PullToRefresh>
+				) : (
+					<ErrorBlock status="empty" title="暂无数据" />
+				)}
 			</div>
 			<AddBills />
 			<TypePopup onSelect={onTagSelect} ref={tagPopupRef as ForwardedRef<TagPopupExpose>} />
